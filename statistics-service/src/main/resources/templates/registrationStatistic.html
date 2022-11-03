@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Registration statistic</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  </head>
+  <body>
+    <table class="table table-bordered table-hover">
+      <tr>
+        <th>Version</th>
+        <th>Number of Registrations</th>
+        <th>Unique Phone Number</th>
+      </tr>
+      <tr th:each="statisticInfo : ${statisticInfo}">
+        <td class="align-middle" th:text="${statisticInfo.version}"></td>
+        <td class="align-middle" th:text="${statisticInfo.numberOfTokens}"></td>
+        <td class="align-middle" th:text="${statisticInfo.numberOfUniquePhoneNumbers}"></td>
+      </tr>
+    </table>
+    <nav class="nav fixed-bottom flex-column">
+      <ul class="nav nav-pills nav-fill">
+        <li class="nav-item">
+          <a class="nav-link active" href="/registration-statistic">Registration Statistic</a>
+        </li>
+        <li class="nav-item bg-light">
+          <a class="nav-link" href="/notification-statistic">Notification Statistic</a>
+        </li>
+      </ul>
+    </nav>
+  </body>
+</html>

@@ -1,0 +1,37 @@
+server:
+  port: 8060
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8061/eureka/
+
+logging:
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} ${LOG_LEVEL_PATTERN:-%5p} %m%n"
+
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+      - id: registration-service
+        uri: lb://registration-service
+        predicates:
+        - Path=/registration/**
+        filters:
+        - RewritePath=/registration/(?<path>.*), /$\{path}
+      - id: notification-sender-service
+        uri: lb://notification-sender-service
+        predicates:
+        - Path=/sender/**
+        filters:
+        - RewritePath=/sender/(?<path>.*), /$\{path}
+      - id: notification-creator-service
+        uri: lb://notification-creator-service
+        predicates:
+        - Path=/creator/**
+        filters:
+        - RewritePath=/creator/(?<path>.*), /$\{path}
